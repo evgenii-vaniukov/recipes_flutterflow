@@ -29,6 +29,7 @@ class _SearchRecipesWidgetState extends State<SearchRecipesWidget> {
     _model = createModel(context, () => SearchRecipesModel());
 
     _model.textController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

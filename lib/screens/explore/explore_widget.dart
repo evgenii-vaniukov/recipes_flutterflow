@@ -23,6 +23,8 @@ class _ExploreWidgetState extends State<ExploreWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ExploreModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -33,6 +33,8 @@ class _RecipeDetailsFirebaseWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => RecipeDetailsFirebaseModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

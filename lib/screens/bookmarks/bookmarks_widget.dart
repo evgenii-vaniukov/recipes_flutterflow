@@ -25,6 +25,8 @@ class _BookmarksWidgetState extends State<BookmarksWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BookmarksModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
