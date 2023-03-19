@@ -29,6 +29,8 @@ class _RecipeDetailsAPIWidgetState extends State<RecipeDetailsAPIWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => RecipeDetailsAPIModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
