@@ -195,6 +195,7 @@ class _SearchRecipesWidgetState extends State<SearchRecipesWidget> {
                                 .secondaryBackground,
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -254,12 +255,15 @@ class _SearchRecipesWidgetState extends State<SearchRecipesWidget> {
                                   height: 100.0,
                                   fit: BoxFit.cover,
                                 ),
-                                Text(
-                                  getJsonField(
-                                    recipesItem,
-                                    r'''$.recipe.label''',
-                                  ).toString(),
-                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                Expanded(
+                                  child: Text(
+                                    getJsonField(
+                                      recipesItem,
+                                      r'''$.recipe.label''',
+                                    ).toString(),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
                                 ),
                               ],
                             ),
