@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/components/empty_list_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -199,6 +200,11 @@ class _SearchRecipesWidgetState extends State<SearchRecipesWidget> {
                           FFAppState().apiResponse,
                           r'''$.hits''',
                         ).toList();
+                        if (recipes.isEmpty) {
+                          return Center(
+                            child: EmptyListWidget(),
+                          );
+                        }
                         return GridView.builder(
                           padding: EdgeInsets.zero,
                           gridDelegate:

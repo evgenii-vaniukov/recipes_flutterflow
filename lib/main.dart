@@ -115,9 +115,9 @@ class _NavBarPageState extends State<NavBarPage> {
         }),
         backgroundColor: Colors.white,
         selectedItemColor: FlutterFlowTheme.of(context).primary,
-        unselectedItemColor: Color(0x8A000000),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        unselectedItemColor: FlutterFlowTheme.of(context).accent2,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -125,7 +125,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.search,
               size: 30.0,
             ),
-            label: 'Home',
+            label: 'Search',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -133,7 +133,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.bookmark_sharp,
               size: 24.0,
             ),
-            label: 'Home',
+            label: 'Saved',
             tooltip: '',
           )
         ],
