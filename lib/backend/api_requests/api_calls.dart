@@ -12,7 +12,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 class GetRecipesCall {
   static Future<ApiCallResponse> call({
     String? recipeName = 'pasta',
-    int? to = 10,
+    int? to = 30,
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'getRecipes',

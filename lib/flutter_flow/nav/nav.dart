@@ -60,13 +60,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : BookmarksWidget(),
         ),
         FFRoute(
-          name: 'Explore',
-          path: '/explore',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Explore')
-              : ExploreWidget(),
-        ),
-        FFRoute(
           name: 'recipeDetailsFirebase',
           path: '/recipeDetailsFirebase',
           builder: (context, params) => RecipeDetailsFirebaseWidget(

@@ -4,6 +4,5 @@ export '/screens/search_recipes/search_recipes_widget.dart'
 export '/screens/recipe_details_a_p_i/recipe_details_a_p_i_widget.dart'
     show RecipeDetailsAPIWidget;
 export '/screens/bookmarks/bookmarks_widget.dart' show BookmarksWidget;
-export '/screens/explore/explore_widget.dart' show ExploreWidget;
 export '/screens/recipe_details_firebase/recipe_details_firebase_widget.dart'
     show RecipeDetailsFirebaseWidget;

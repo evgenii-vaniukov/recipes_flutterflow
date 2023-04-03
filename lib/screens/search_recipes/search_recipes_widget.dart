@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,240 +43,353 @@ class _SearchRecipesWidgetState extends State<SearchRecipesWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Page Title',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
-                color: Colors.white,
-                fontSize: 22.0,
-              ),
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 2.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                width: double.infinity,
-                height: 100.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
+      body: NestedScrollView(
+        headerSliverBuilder: (context, _) => [
+          SliverAppBar(
+            pinned: false,
+            floating: false,
+            backgroundColor: FlutterFlowTheme.of(context).primary,
+            automaticallyImplyLeading: false,
+            title: Align(
+              alignment: AlignmentDirectional(0.0, 0.0),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                child: Text(
+                  'Search Tab',
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        fontFamily: 'Outfit',
+                        color: Colors.white,
+                        fontSize: 30.0,
+                      ),
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
+              ),
+            ),
+            actions: [],
+            centerTitle: false,
+            toolbarHeight: MediaQuery.of(context).size.height * 0.1,
+            elevation: 2.0,
+          )
+        ],
+        body: Builder(
+          builder: (context) {
+            return SafeArea(
+              child: GestureDetector(
+                onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  scrollDirection: Axis.vertical,
                   children: [
-                    Expanded(
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                        child: TextFormField(
-                          controller: _model.textController,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            hintText: 'Search for a recipe...',
-                            hintStyle: FlutterFlowTheme.of(context).bodyText2,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          10.0, 10.0, 10.0, 10.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 50.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).secondary,
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 0.0, 0.0),
+                                child: TextFormField(
+                                  controller: _model.textController,
+                                  autofocus: true,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    hintText: 'Search for a recipe...',
+                                    hintStyle:
+                                        FlutterFlowTheme.of(context).bodySmall,
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    errorBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    focusedErrorBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                      ),
+                                  validator: _model.textControllerValidator
+                                      .asValidator(context),
+                                ),
                               ),
                             ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 16.0, 5.0),
+                              child: FlutterFlowIconButton(
+                                borderColor: Colors.transparent,
+                                borderRadius: 30.0,
+                                borderWidth: 1.0,
+                                buttonSize: 60.0,
+                                icon: Icon(
+                                  Icons.search,
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  size: 30.0,
+                                ),
+                                onPressed: () async {
+                                  _model.apiResultzu2 =
+                                      await GetRecipesCall.call(
+                                    recipeName: _model.textController.text,
+                                  );
+                                  setState(() {
+                                    FFAppState().apiResponse =
+                                        (_model.apiResultzu2?.jsonBody ?? '');
+                                  });
+
+                                  setState(() {});
+                                },
                               ),
                             ),
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                          validator: _model.textControllerValidator
-                              .asValidator(context),
+                          ],
                         ),
                       ),
                     ),
-                    FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30.0,
-                      borderWidth: 1.0,
-                      buttonSize: 60.0,
-                      icon: Icon(
-                        Icons.search,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 30.0,
-                      ),
-                      onPressed: () async {
-                        _model.apiResult22p = await GetRecipesCall.call(
-                          recipeName: _model.textController.text,
+                    Builder(
+                      builder: (context) {
+                        final recipes = getJsonField(
+                          FFAppState().apiResponse,
+                          r'''$.hits''',
+                        ).toList();
+                        return GridView.builder(
+                          padding: EdgeInsets.zero,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 0.0,
+                            mainAxisSpacing: 5.0,
+                            childAspectRatio: 1.0,
+                          ),
+                          primary: false,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: recipes.length,
+                          itemBuilder: (context, recipesIndex) {
+                            final recipesItem = recipes[recipesIndex];
+                            return Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 0.0, 5.0, 0.0),
+                              child: InkWell(
+                                onTap: () async {
+                                  context.pushNamed(
+                                    'recipeDetailsAPI',
+                                    queryParams: {
+                                      'recipeDetailsAPI': serializeParam(
+                                        getJsonField(
+                                          recipesItem,
+                                          r'''$.recipe''',
+                                        ),
+                                        ParamType.JSON,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                },
+                                child: Card(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 5.0, 5.0, 5.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 10.0, 0.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                FlutterFlowIconButton(
+                                                  borderColor:
+                                                      Colors.transparent,
+                                                  borderRadius: 25.0,
+                                                  borderWidth: 1.0,
+                                                  buttonSize: 40.0,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                  hoverColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryText,
+                                                  hoverIconColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                  icon: Icon(
+                                                    Icons.bookmark,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                    size: 20.0,
+                                                  ),
+                                                  onPressed: () async {
+                                                    final recipeDetailsCreateData =
+                                                        {
+                                                      ...createRecipeDetailsRecordData(
+                                                        recipeName:
+                                                            getJsonField(
+                                                          recipesItem,
+                                                          r'''$.recipe.label''',
+                                                        ).toString(),
+                                                        calories: getJsonField(
+                                                          recipesItem,
+                                                          r'''$.recipe.calories''',
+                                                        ),
+                                                        cuisineType:
+                                                            getJsonField(
+                                                          recipesItem,
+                                                          r'''$.recipe.cuisineType''',
+                                                        ).toString(),
+                                                        recipeImage:
+                                                            getJsonField(
+                                                          recipesItem,
+                                                          r'''$.recipe.image''',
+                                                        ),
+                                                      ),
+                                                      'ingredients':
+                                                          (getJsonField(
+                                                        recipesItem,
+                                                        r'''$.recipe.ingredientLines''',
+                                                      ) as List)
+                                                              .map<String>((s) =>
+                                                                  s.toString())
+                                                              .toList(),
+                                                    };
+                                                    await RecipeDetailsRecord
+                                                        .collection
+                                                        .doc()
+                                                        .set(
+                                                            recipeDetailsCreateData);
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 0.0, 10.0, 0.0),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              child: Image.network(
+                                                getJsonField(
+                                                  recipesItem,
+                                                  r'''$.recipe.image''',
+                                                ),
+                                                width: double.infinity,
+                                                height: 100.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 10.0, 0.0, 0.0),
+                                            child: AutoSizeText(
+                                              getJsonField(
+                                                recipesItem,
+                                                r'''$.recipe.label''',
+                                              ).toString(),
+                                              textAlign: TextAlign.center,
+                                              maxLines: 1,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondary,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         );
-
-                        setState(() {});
                       },
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                child: Builder(
-                  builder: (context) {
-                    final recipes = GetRecipesCall.recipes(
-                          (_model.apiResult22p?.jsonBody ?? ''),
-                        )?.toList() ??
-                        [];
-                    return GridView.builder(
-                      padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                        childAspectRatio: 1.0,
-                      ),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: recipes.length,
-                      itemBuilder: (context, recipesIndex) {
-                        final recipesItem = recipes[recipesIndex];
-                        return InkWell(
-                          onTap: () async {
-                            context.pushNamed(
-                              'recipeDetailsAPI',
-                              queryParams: {
-                                'recipeDetailsAPI': serializeParam(
-                                  getJsonField(
-                                    recipesItem,
-                                    r'''$.recipe''',
-                                  ),
-                                  ParamType.JSON,
-                                ),
-                              }.withoutNulls,
-                            );
-                          },
-                          child: Card(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    FlutterFlowIconButton(
-                                      borderColor: Colors.transparent,
-                                      borderRadius: 30.0,
-                                      borderWidth: 1.0,
-                                      buttonSize: 40.0,
-                                      icon: Icon(
-                                        Icons.bookmark,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 20.0,
-                                      ),
-                                      onPressed: () async {
-                                        final recipeDetailsCreateData = {
-                                          ...createRecipeDetailsRecordData(
-                                            recipeName: getJsonField(
-                                              recipesItem,
-                                              r'''$.recipe.label''',
-                                            ).toString(),
-                                            calories: getJsonField(
-                                              recipesItem,
-                                              r'''$.recipe.calories''',
-                                            ),
-                                            cuisineType: getJsonField(
-                                              recipesItem,
-                                              r'''$.recipe.cuisineType''',
-                                            ).toString(),
-                                            recipeImage: getJsonField(
-                                              recipesItem,
-                                              r'''$.recipe.image''',
-                                            ),
-                                          ),
-                                          'ingredients': (getJsonField(
-                                            recipesItem,
-                                            r'''$.recipe.ingredientLines''',
-                                          ) as List)
-                                              .map<String>((s) => s.toString())
-                                              .toList(),
-                                        };
-                                        await RecipeDetailsRecord.collection
-                                            .doc()
-                                            .set(recipeDetailsCreateData);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                Image.network(
-                                  getJsonField(
-                                    recipesItem,
-                                    r'''$.recipe.image''',
-                                  ),
-                                  width: 100.0,
-                                  height: 100.0,
-                                  fit: BoxFit.cover,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    getJsonField(
-                                      recipesItem,
-                                      r'''$.recipe.label''',
-                                    ).toString(),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

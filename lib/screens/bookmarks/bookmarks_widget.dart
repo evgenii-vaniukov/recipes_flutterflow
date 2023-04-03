@@ -1,7 +1,9 @@
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
@@ -39,16 +41,32 @@ class _BookmarksWidgetState extends State<BookmarksWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30.0,
+          borderWidth: 1.0,
+          buttonSize: 60.0,
+          icon: Icon(
+            Icons.chevron_left,
+            color: FlutterFlowTheme.of(context).alternate,
+            size: 30.0,
+          ),
+          onPressed: () async {
+            context.pushNamed('searchRecipes');
+          },
+        ),
         title: Text(
-          'Page Title',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+          'Saved Recipes',
+          style: FlutterFlowTheme.of(context).headlineMedium.override(
+                fontFamily: 'Outfit',
                 color: Colors.white,
                 fontSize: 22.0,
               ),
@@ -124,6 +142,7 @@ class _BookmarksWidgetState extends State<BookmarksWidget> {
                   }(),
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
+                  reverse: false,
                   scrollDirection: Axis.vertical,
                   builderDelegate:
                       PagedChildBuilderDelegate<RecipeDetailsRecord>(
@@ -133,7 +152,7 @@ class _BookmarksWidgetState extends State<BookmarksWidget> {
                         width: 50.0,
                         height: 50.0,
                         child: CircularProgressIndicator(
-                          color: FlutterFlowTheme.of(context).primaryColor,
+                          color: FlutterFlowTheme.of(context).primary,
                         ),
                       ),
                     ),
@@ -153,20 +172,42 @@ class _BookmarksWidgetState extends State<BookmarksWidget> {
                             }.withoutNulls,
                           );
                         },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Image.network(
-                              listViewRecipeDetailsRecord.recipeImage!,
-                              width: 100.0,
-                              height: 100.0,
-                              fit: BoxFit.cover,
-                            ),
-                            Text(
+                        child: Slidable(
+                          endActionPane: ActionPane(
+                            motion: const ScrollMotion(),
+                            extentRatio: 0.25,
+                            children: [
+                              SlidableAction(
+                                label: 'Delete',
+                                backgroundColor: Color(0xFFF32124),
+                                icon: Icons.delete,
+                                onPressed: (_) async {
+                                  await listViewRecipeDetailsRecord.reference
+                                      .delete();
+                                },
+                              ),
+                            ],
+                          ),
+                          child: ListTile(
+                            title: Text(
                               listViewRecipeDetailsRecord.recipeName!,
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context).headlineSmall,
                             ),
-                          ],
+                            subtitle: Text(
+                              'Tap to see details',
+                              style: FlutterFlowTheme.of(context).titleSmall,
+                            ),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF303030),
+                              size: 20.0,
+                            ),
+                            tileColor: Color(0xFFF5F5F5),
+                            dense: false,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
                         ),
                       );
                     },
