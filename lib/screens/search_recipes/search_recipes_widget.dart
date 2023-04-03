@@ -1,10 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
-import '/components/empty_list_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -202,7 +202,10 @@ class _SearchRecipesWidgetState extends State<SearchRecipesWidget> {
                         ).toList();
                         if (recipes.isEmpty) {
                           return Center(
-                            child: EmptyListWidget(),
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  'https://platform.cstatic-images.com/large/in/v2/stock_photos/af7f32d6-41d2-4a67-bd6e-49e188d0a7fb/3de60623-b1df-44e7-9da6-53129a69039c.png',
+                            ),
                           );
                         }
                         return GridView.builder(
