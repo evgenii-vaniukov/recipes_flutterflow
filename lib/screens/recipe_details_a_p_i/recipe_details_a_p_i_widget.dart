@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -249,6 +250,65 @@ class _RecipeDetailsAPIWidgetState extends State<RecipeDetailsAPIWidget> {
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         );
                       },
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 0.0, 0.0),
+                child: Builder(
+                  builder: (context) {
+                    final healthLabels = getJsonField(
+                      widget.recipeDetailsAPI,
+                      r'''$.healthLabels''',
+                    ).toList();
+                    return Wrap(
+                      spacing: 5.0,
+                      runSpacing: 5.0,
+                      alignment: WrapAlignment.start,
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      direction: Axis.horizontal,
+                      runAlignment: WrapAlignment.start,
+                      verticalDirection: VerticalDirection.down,
+                      clipBehavior: Clip.none,
+                      children: List.generate(healthLabels.length,
+                          (healthLabelsIndex) {
+                        final healthLabelsItem =
+                            healthLabels[healthLabelsIndex];
+                        return FFButtonWidget(
+                          onPressed: () {
+                            print('Button pressed ...');
+                          },
+                          text: healthLabelsItem.toString(),
+                          options: FFButtonOptions(
+                            width: 100.0,
+                            height: 40.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                            elevation: 2.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(20.0),
+                            hoverColor: FlutterFlowTheme.of(context).info,
+                            hoverBorderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).accent4,
+                              width: 1.0,
+                            ),
+                          ),
+                        );
+                      }),
                     );
                   },
                 ),
