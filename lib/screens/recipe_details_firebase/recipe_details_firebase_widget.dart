@@ -2,7 +2,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -104,6 +103,7 @@ class _RecipeDetailsFirebaseWidgetState
             body: SafeArea(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
@@ -136,7 +136,8 @@ class _RecipeDetailsFirebaseWidgetState
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Italian',
+                                          recipeDetailsFirebaseRecipeDetailsRecord
+                                              .cuisineType!,
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall
                                               .override(
@@ -149,7 +150,8 @@ class _RecipeDetailsFirebaseWidgetState
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 0.0),
                                           child: AutoSizeText(
-                                            'Pasta Carbonara',
+                                            recipeDetailsFirebaseRecipeDetailsRecord
+                                                .recipeName!,
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium,
                                           ),
@@ -171,7 +173,11 @@ class _RecipeDetailsFirebaseWidgetState
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 4.0, 0.0, 0.0),
                                               child: Text(
-                                                '800',
+                                                recipeDetailsFirebaseRecipeDetailsRecord
+                                                    .calories!
+                                                    .toString()
+                                                    .maybeHandleOverflow(
+                                                        maxChars: 4),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,
@@ -181,20 +187,6 @@ class _RecipeDetailsFirebaseWidgetState
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(0.0),
-                                    bottomRight: Radius.circular(12.0),
-                                    topLeft: Radius.circular(0.0),
-                                    topRight: Radius.circular(12.0),
-                                  ),
-                                  child: Image.network(
-                                    'https://platform.cstatic-images.com/large/in/v2/stock_photos/af7f32d6-41d2-4a67-bd6e-49e188d0a7fb/3de60623-b1df-44e7-9da6-53129a69039c.png',
-                                    width: 160.0,
-                                    height: 100.0,
-                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ],
@@ -238,57 +230,35 @@ class _RecipeDetailsFirebaseWidgetState
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 0.0, 0.0),
-                    child: Wrap(
-                      spacing: 5.0,
-                      runSpacing: 5.0,
-                      alignment: WrapAlignment.start,
-                      crossAxisAlignment: WrapCrossAlignment.start,
-                      direction: Axis.horizontal,
-                      runAlignment: WrapAlignment.start,
-                      verticalDirection: VerticalDirection.down,
-                      clipBehavior: Clip.none,
-                      children: [
-                        FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
-                          },
-                          text: 'Button',
-                          options: FFButtonOptions(
-                            width: 100.0,
-                            height: 40.0,
+                          Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                            elevation: 2.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(20.0),
-                            hoverColor: FlutterFlowTheme.of(context).info,
-                            hoverBorderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).accent4,
-                              width: 1.0,
+                                25.0, 0.0, 16.0, 16.0),
+                            child: Builder(
+                              builder: (context) {
+                                final ingredients =
+                                    recipeDetailsFirebaseRecipeDetailsRecord
+                                        .ingredients!
+                                        .toList();
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: ingredients.length,
+                                  itemBuilder: (context, ingredientsIndex) {
+                                    final ingredientsItem =
+                                        ingredients[ingredientsIndex];
+                                    return Text(
+                                      ingredientsItem,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
