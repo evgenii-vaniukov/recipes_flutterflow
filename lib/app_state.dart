@@ -18,16 +18,6 @@ class FFAppState extends ChangeNotifier {
 
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey('ff_apiResponse')) {
-      try {
-        _apiResponse = jsonDecode(prefs.getString('ff_apiResponse') ?? '');
-      } catch (e) {
-        print("Can't decode persisted json. Error: $e.");
-      }
-    }
-
-    _searchParameter =
-        prefs.getString('ff_searchParameter') ?? _searchParameter;
   }
 
   void update(VoidCallback callback) {
@@ -41,14 +31,6 @@ class FFAppState extends ChangeNotifier {
   dynamic get apiResponse => _apiResponse;
   set apiResponse(dynamic _value) {
     _apiResponse = _value;
-    prefs.setString('ff_apiResponse', jsonEncode(_value));
-  }
-
-  String _searchParameter = '';
-  String get searchParameter => _searchParameter;
-  set searchParameter(String _value) {
-    _searchParameter = _value;
-    prefs.setString('ff_searchParameter', _value);
   }
 }
 
